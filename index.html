@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Simileoluwa ♥</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff6b9d, #ffc0cb, #ffb6c1, #ff91a4);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            overflow-x: hidden;
+            color: #2c1810;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            animation: cardGlow 3s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        @keyframes cardGlow {
+            0% {
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1), 0 0 30px rgba(255, 105, 157, 0.3);
+            }
+            100% {
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1), 0 0 50px rgba(255, 105, 157, 0.5);
+            }
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b9d, #ffc0cb, #ffb6c1, #ff91a4);
+            border-radius: 32px;
+            z-index: -1;
+            animation: borderRotate 4s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .name-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #d63384, #ff6b9d, #ff91a4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: nameShine 2s ease-in-out infinite;
+        }
+
+        @keyframes nameShine {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            color: #8b4c6b;
+            margin-bottom: 40px;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .message {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #5a3a47;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 182, 193, 0.4) 0%, rgba(255, 182, 193, 0.4) 100%);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .proposal-section {
+            margin: 40px 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.5s forwards;
+        }
+
+        .proposal-text {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            font-size: 1.4em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, #ff6b9d, #ff91a4);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.5);
+        }
+
+        .btn-no {
+            background: linear-gradient(45deg, #ffc0cb, #ffb6c1);
+            color: #8b4c6b;
+            box-shadow: 0 10px 20px rgba(255, 192, 203, 0.3);
+        }
+
+        .btn-no:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 192, 203, 0.5);
+        }
+
+        .celebration {
+            display: none;
+            text-align: center;
+            animation: celebrationPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes celebrationPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .celebration-text {
+            font-size: 3em;
+            color: #d63384;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .sparkles {
+            position: absolute;
+            font-size: 2em;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .decorative-roses {
+            position: absolute;
+            font-size: 3em;
+            color: #ff6b9d;
+            opacity: 0.7;
+        }
+
+        .rose-1 { top: 10%; left: 10%; animation: roseSway 4s ease-in-out infinite; }
+        .rose-2 { top: 15%; right: 15%; animation: roseSway 3s ease-in-out infinite reverse; }
+        .rose-3 { bottom: 20%; left: 12%; animation: roseSway 5s ease-in-out infinite; }
+        .rose-4 { bottom: 15%; right: 10%; animation: roseSway 3.5s ease-in-out infinite reverse; }
+
+        @keyframes roseSway {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-card {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+            
+            .name-title {
+                font-size: 2.5em;
+            }
+            
+            .subtitle {
+                font-size: 1.4em;
+            }
+            
+            .message {
+                font-size: 1.1em;
+            }
+            
+            .proposal-text {
+                font-size: 1.8em;
+            }
+            
+            .answer-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .btn {
+                width: 200px;
+                padding: 15px 30px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="heartContainer"></div>
+    
+    <div class="container">
+        <div class="decorative-roses rose-1">🌹</div>
+        <div class="decorative-roses rose-2">🌹</div>
+        <div class="decorative-roses rose-3">🌹</div>
+        <div class="decorative-roses rose-4">🌹</div>
+        
+        <div class="main-card">
+            <div class="sparkles" style="top: 20px; left: 50px;">✨</div>
+            <div class="sparkles" style="top: 30px; right: 60px; animation-delay: 0.5s;">✨</div>
+            <div class="sparkles" style="bottom: 40px; left: 40px; animation-delay: 1s;">✨</div>
+            <div class="sparkles" style="bottom: 20px; right: 50px; animation-delay: 1.5s;">✨</div>
+            
+            <div id="mainContent">
+                <h1 class="name-title">Simileoluwa Abiodun-Ilori Nora</h1>
+                
+                <p class="subtitle">My Dearest Friend, My Heart's Desire</p>
+                
+                <div class="message">
+                    <p>From the moment we became friends, you've brought <span class="highlight">light</span> into my world in ways I never thought possible. Your laugh, your kindness, your beautiful spirit – everything about you makes my heart skip a beat.</p>
+                    
+                    <p>We've shared countless memories, inside jokes, and dreams together. But there's something I've been wanting to tell you, something that's been growing stronger in my heart every day...</p>
+                    
+                    <p><span class="highlight">I love you</span>, not just as my best friend, but as the person I want to spend my life with. You are my sunshine, my comfort, my everything.</p>
+                </div>
+                
+                <div class="proposal-section">
+                    <div class="proposal-text">
+                        Will you be my girlfriend? 💕
+                    </div>
+                    
+                    <div class="answer-buttons">
+                        <button class="btn btn-yes" onclick="showCelebration()">Yes! 💖</button>
+                        <button class="btn btn-no" onclick="showGentleMessage()">I need time to think 💭</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="celebration" class="celebration">
+                <div class="celebration-text">You've made me the happiest person alive! 🎉</div>
+                <p style="font-size: 1.5em; color: #8b4c6b; margin-top: 20px;">
+                    I promise to love you, cherish you, and be the best partner I can be. 
+                    Our adventure together is just beginning! ❤️✨
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('heartContainer').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+        
+        // Create hearts periodically
+        setInterval(createHeart, 800);
+        
+        function showCelebration() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('celebration').style.display = 'block';
+            
+            // Create celebration hearts
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createCelebrationHeart();
+                }, i * 100);
+            }
+        }
+        
+        function createCelebrationHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💕';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = '100%';
+            heart.style.fontSize = '2em';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1000';
+            heart.style.animation = 'float 3s ease-out forwards';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+        
+        function showGentleMessage() {
+            const buttons = document.querySelector('.answer-buttons');
+            buttons.innerHTML = `
+                <div style="text-align: center; color: #8b4c6b; font-size: 1.2em; line-height: 1.6;">
+                    <p>I completely understand, and I respect your feelings. 💕</p>
+                    <p>Take all the time you need. Our friendship means the world to me, 
+                    and that will never change regardless of your answer.</p>
+                    <p style="margin-top: 20px; font-style: italic;">You're amazing, Simileoluwa. ❤️</p>
+                </div>
+            `;
+        }
+        
+        // Add some extra sparkle effects on mouse move
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.1) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.fontSize = '1em';
+                sparkle.style.zIndex = '1000';
+                sparkle.style.animation = 'sparkle 1s ease-out forwards';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
