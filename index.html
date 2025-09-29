@@ -357,38 +357,44 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         // ============================================
-        // CONFIGURATION - ALL SET UP AND READY!
+        // TELEGRAM CONFIGURATION - ALL SET UP!
         // ============================================
-        const EMAIL_CONFIG = {
-            publicKey: "Sd-xP3BcLW6INQ2yG",
-            serviceId: "service_61qcku7",
-            templateId: "template_lfpynkb",
-            yourEmail: "davidbibiresanmi@gmail.com"
+        const TELEGRAM_CONFIG = {
+            botToken: "8456322301:AAFKHJhu-Pelhk6DAkurAxqUmJSIAZbFtek",
+            chatId: "5039067144"
         };
-        
-        // Initialize EmailJS
-        (function() {
-            emailjs.init(EMAIL_CONFIG.publicKey);
-        })();
 
-        // Function to send email notification
+        // Function to send Telegram notification
         function sendNotification(response) {
-            const templateParams = {
-                to_email: EMAIL_CONFIG.yourEmail,
-                response: response,
-                timestamp: new Date().toLocaleString(),
-                from_name: "Simileoluwa Response System"
-            };
-
-            emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateId, templateParams)
-                .then(function(result) {
-                    console.log('✅ Notification sent successfully!', result.status);
-                }, function(error) {
-                    console.log('❌ Failed to send notification:', error);
-                });
+            const timestamp = new Date().toLocaleString();
+            const message = `💕 *SIMILEOLUWA RESPONDED!* 💕\n\n${response}\n\n⏰ Time: ${timestamp}`;
+            
+            const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CONFIG.chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    console.log('✅ Telegram notification sent successfully!');
+                } else {
+                    console.log('❌ Failed to send Telegram notification:', data);
+                }
+            })
+            .catch(error => {
+                console.log('❌ Error sending notification:', error);
+            });
         }
 
         // Create floating hearts
