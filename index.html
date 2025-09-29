@@ -357,7 +357,40 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // ============================================
+        // CONFIGURATION - ALL SET UP AND READY!
+        // ============================================
+        const EMAIL_CONFIG = {
+            publicKey: "Sd-xP3BcLW6INQ2yG",
+            serviceId: "service_61qcku7",
+            templateId: "template_lfpynkb",
+            yourEmail: "davidbibiresanmi@gmail.com"
+        };
+        
+        // Initialize EmailJS
+        (function() {
+            emailjs.init(EMAIL_CONFIG.publicKey);
+        })();
+
+        // Function to send email notification
+        function sendNotification(response) {
+            const templateParams = {
+                to_email: EMAIL_CONFIG.yourEmail,
+                response: response,
+                timestamp: new Date().toLocaleString(),
+                from_name: "Simileoluwa Response System"
+            };
+
+            emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateId, templateParams)
+                .then(function(result) {
+                    console.log('✅ Notification sent successfully!', result.status);
+                }, function(error) {
+                    console.log('❌ Failed to send notification:', error);
+                });
+        }
+
         // Create floating hearts
         function createHeart() {
             const heart = document.createElement('div');
@@ -377,6 +410,9 @@
         setInterval(createHeart, 800);
         
         function showCelebration() {
+            // Send notification that she said YES!
+            sendNotification("🎉 YES! She said YES! 💖💖💖 Simileoluwa wants to be your girlfriend!");
+            
             document.getElementById('mainContent').style.display = 'none';
             document.getElementById('celebration').style.display = 'block';
             
@@ -406,6 +442,9 @@
         }
         
         function showGentleMessage() {
+            // Send notification that she needs time
+            sendNotification("💭 She needs time to think. Give her space and be patient.");
+            
             const buttons = document.querySelector('.answer-buttons');
             buttons.innerHTML = `
                 <div style="text-align: center; color: #8b4c6b; font-size: 1.2em; line-height: 1.6;">
